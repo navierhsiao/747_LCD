@@ -184,6 +184,8 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+    uint8_t set=0;
+    set++;
    if(pending_buffer < 0)
    {
      CopyBuffer((uint32_t *)Images[ImageIndex++], (uint32_t *)LCD_FRAME_BUFFER, 240, 160, 320, 240);
