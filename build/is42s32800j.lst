@@ -1,0 +1,1264 @@
+ARM GAS  /tmp/cclcSZJb.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"is42s32800j.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.bss.Command,"aw",%nobits
+  17              		.align	2
+  20              	Command:
+  21 0000 00000000 		.space	16
+  21      00000000 
+  21      00000000 
+  21      00000000 
+  22              		.section	.text.IS42S32800J_Init,"ax",%progbits
+  23              		.align	1
+  24              		.global	IS42S32800J_Init
+  25              		.arch armv7e-m
+  26              		.syntax unified
+  27              		.thumb
+  28              		.thumb_func
+  29              		.fpu fpv5-d16
+  31              	IS42S32800J_Init:
+  32              	.LFB331:
+  33              		.file 1 "./BSP/components/is42s32800j/is42s32800j.c"
+   1:./BSP/components/is42s32800j/is42s32800j.c ****                                                  /**
+   2:./BSP/components/is42s32800j/is42s32800j.c ****  ******************************************************************************
+   3:./BSP/components/is42s32800j/is42s32800j.c ****  * @file    is42s32800j.c
+   4:./BSP/components/is42s32800j/is42s32800j.c ****  * @author  MCD Application Team
+   5:./BSP/components/is42s32800j/is42s32800j.c ****  * @brief   is42s32800j sdram 8MBx32 driver file
+   6:./BSP/components/is42s32800j/is42s32800j.c ****  ******************************************************************************
+   7:./BSP/components/is42s32800j/is42s32800j.c ****  * @attention
+   8:./BSP/components/is42s32800j/is42s32800j.c ****   * @attention
+   9:./BSP/components/is42s32800j/is42s32800j.c ****   *
+  10:./BSP/components/is42s32800j/is42s32800j.c ****   * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  11:./BSP/components/is42s32800j/is42s32800j.c ****   * All rights reserved.</center></h2>
+  12:./BSP/components/is42s32800j/is42s32800j.c ****   *
+  13:./BSP/components/is42s32800j/is42s32800j.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  14:./BSP/components/is42s32800j/is42s32800j.c ****   * the "License"; You may not use this file except in compliance with the
+  15:./BSP/components/is42s32800j/is42s32800j.c ****   * License. You may obtain a copy of the License at:
+  16:./BSP/components/is42s32800j/is42s32800j.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  17:./BSP/components/is42s32800j/is42s32800j.c ****  *
+  18:./BSP/components/is42s32800j/is42s32800j.c ****  ******************************************************************************
+  19:./BSP/components/is42s32800j/is42s32800j.c ****  */
+  20:./BSP/components/is42s32800j/is42s32800j.c **** 
+  21:./BSP/components/is42s32800j/is42s32800j.c **** /* Includes ------------------------------------------------------------------*/
+  22:./BSP/components/is42s32800j/is42s32800j.c **** #include "is42s32800j.h"
+  23:./BSP/components/is42s32800j/is42s32800j.c **** 
+  24:./BSP/components/is42s32800j/is42s32800j.c **** /** @addtogroup BSP
+ARM GAS  /tmp/cclcSZJb.s 			page 2
+
+
+  25:./BSP/components/is42s32800j/is42s32800j.c ****   * @{
+  26:./BSP/components/is42s32800j/is42s32800j.c ****   */
+  27:./BSP/components/is42s32800j/is42s32800j.c ****   
+  28:./BSP/components/is42s32800j/is42s32800j.c **** /** @addtogroup Components
+  29:./BSP/components/is42s32800j/is42s32800j.c ****   * @{
+  30:./BSP/components/is42s32800j/is42s32800j.c ****   */ 
+  31:./BSP/components/is42s32800j/is42s32800j.c **** 
+  32:./BSP/components/is42s32800j/is42s32800j.c **** /** @defgroup IS42S32800J IS42S32800J
+  33:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief     This file provides a set of functions needed to drive the 
+  34:./BSP/components/is42s32800j/is42s32800j.c ****   *            IS42S32800J SDRAM memory.
+  35:./BSP/components/is42s32800j/is42s32800j.c ****   * @{
+  36:./BSP/components/is42s32800j/is42s32800j.c ****   */
+  37:./BSP/components/is42s32800j/is42s32800j.c ****  
+  38:./BSP/components/is42s32800j/is42s32800j.c **** /** @defgroup IS42S32800J_Private_Variables IS42S32800J Private Variables
+  39:./BSP/components/is42s32800j/is42s32800j.c ****   * @{
+  40:./BSP/components/is42s32800j/is42s32800j.c ****   */
+  41:./BSP/components/is42s32800j/is42s32800j.c **** static FMC_SDRAM_CommandTypeDef Command;
+  42:./BSP/components/is42s32800j/is42s32800j.c **** /**
+  43:./BSP/components/is42s32800j/is42s32800j.c ****   * @}
+  44:./BSP/components/is42s32800j/is42s32800j.c ****   */ 
+  45:./BSP/components/is42s32800j/is42s32800j.c **** 
+  46:./BSP/components/is42s32800j/is42s32800j.c **** /** @defgroup IS42S32800J_Function_Prototypes IS42S32800J Function Prototypes
+  47:./BSP/components/is42s32800j/is42s32800j.c ****   * @{
+  48:./BSP/components/is42s32800j/is42s32800j.c ****   */
+  49:./BSP/components/is42s32800j/is42s32800j.c **** static int32_t IS42S32800J_Delay(uint32_t Delay);
+  50:./BSP/components/is42s32800j/is42s32800j.c **** 
+  51:./BSP/components/is42s32800j/is42s32800j.c **** /**
+  52:./BSP/components/is42s32800j/is42s32800j.c ****   * @}
+  53:./BSP/components/is42s32800j/is42s32800j.c ****   */ 
+  54:./BSP/components/is42s32800j/is42s32800j.c **** 
+  55:./BSP/components/is42s32800j/is42s32800j.c **** /** @defgroup IS42S32800J_Exported_Functions IS42S32800J Exported Functions
+  56:./BSP/components/is42s32800j/is42s32800j.c ****   * @{
+  57:./BSP/components/is42s32800j/is42s32800j.c ****   */
+  58:./BSP/components/is42s32800j/is42s32800j.c **** /**
+  59:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief  Initializes the IS42S32800J SDRAm memory
+  60:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Ctx Component object pointer
+  61:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  pRegMode : Pointer to Register Mode structure
+  62:./BSP/components/is42s32800j/is42s32800j.c ****   * @retval error status
+  63:./BSP/components/is42s32800j/is42s32800j.c ****   */
+  64:./BSP/components/is42s32800j/is42s32800j.c **** int32_t IS42S32800J_Init(SDRAM_HandleTypeDef *Ctx, IS42S32800J_Context_t *pRegMode) 
+  65:./BSP/components/is42s32800j/is42s32800j.c **** {
+  34              		.loc 1 65 1
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 16
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 8
+  41              		.cfi_offset 7, -8
+  42              		.cfi_offset 14, -4
+  43 0002 84B0     		sub	sp, sp, #16
+  44              	.LCFI1:
+  45              		.cfi_def_cfa_offset 24
+  46 0004 00AF     		add	r7, sp, #0
+  47              	.LCFI2:
+  48              		.cfi_def_cfa_register 7
+  49 0006 7860     		str	r0, [r7, #4]
+ARM GAS  /tmp/cclcSZJb.s 			page 3
+
+
+  50 0008 3960     		str	r1, [r7]
+  66:./BSP/components/is42s32800j/is42s32800j.c ****   int32_t ret = IS42S32800J_ERROR;
+  51              		.loc 1 66 11
+  52 000a 4FF0FF33 		mov	r3, #-1
+  53 000e FB60     		str	r3, [r7, #12]
+  67:./BSP/components/is42s32800j/is42s32800j.c ****   
+  68:./BSP/components/is42s32800j/is42s32800j.c ****   /* Step 1: Configure a clock configuration enable command */
+  69:./BSP/components/is42s32800j/is42s32800j.c ****   if(IS42S32800J_ClockEnable(Ctx, pRegMode->TargetBank) == IS42S32800J_OK)
+  54              		.loc 1 69 6
+  55 0010 3B68     		ldr	r3, [r7]
+  56 0012 1B68     		ldr	r3, [r3]
+  57 0014 1946     		mov	r1, r3
+  58 0016 7868     		ldr	r0, [r7, #4]
+  59 0018 FFF7FEFF 		bl	IS42S32800J_ClockEnable
+  60 001c 0346     		mov	r3, r0
+  61              		.loc 1 69 5
+  62 001e 002B     		cmp	r3, #0
+  63 0020 28D1     		bne	.L2
+  70:./BSP/components/is42s32800j/is42s32800j.c ****   {
+  71:./BSP/components/is42s32800j/is42s32800j.c ****     /* Step 2: Insert 100 us minimum delay */ 
+  72:./BSP/components/is42s32800j/is42s32800j.c ****     /* Inserted delay is equal to 1 ms due to systick time base unit (ms) */
+  73:./BSP/components/is42s32800j/is42s32800j.c ****     (void)IS42S32800J_Delay(1);
+  64              		.loc 1 73 11
+  65 0022 0120     		movs	r0, #1
+  66 0024 FFF7FEFF 		bl	IS42S32800J_Delay
+  74:./BSP/components/is42s32800j/is42s32800j.c ****     
+  75:./BSP/components/is42s32800j/is42s32800j.c ****     /* Step 3: Configure a PALL (precharge all) command */ 
+  76:./BSP/components/is42s32800j/is42s32800j.c ****     if(IS42S32800J_Precharge(Ctx, pRegMode->TargetBank) == IS42S32800J_OK)
+  67              		.loc 1 76 8
+  68 0028 3B68     		ldr	r3, [r7]
+  69 002a 1B68     		ldr	r3, [r3]
+  70 002c 1946     		mov	r1, r3
+  71 002e 7868     		ldr	r0, [r7, #4]
+  72 0030 FFF7FEFF 		bl	IS42S32800J_Precharge
+  73 0034 0346     		mov	r3, r0
+  74              		.loc 1 76 7
+  75 0036 002B     		cmp	r3, #0
+  76 0038 1CD1     		bne	.L2
+  77:./BSP/components/is42s32800j/is42s32800j.c ****     {
+  78:./BSP/components/is42s32800j/is42s32800j.c ****       /* Step 4: Configure a Refresh command */ 
+  79:./BSP/components/is42s32800j/is42s32800j.c ****       if(IS42S32800J_RefreshMode(Ctx, pRegMode->TargetBank, pRegMode->RefreshMode) == IS42S32800J_O
+  77              		.loc 1 79 10
+  78 003a 3B68     		ldr	r3, [r7]
+  79 003c 1968     		ldr	r1, [r3]
+  80 003e 3B68     		ldr	r3, [r7]
+  81 0040 5B68     		ldr	r3, [r3, #4]
+  82 0042 1A46     		mov	r2, r3
+  83 0044 7868     		ldr	r0, [r7, #4]
+  84 0046 FFF7FEFF 		bl	IS42S32800J_RefreshMode
+  85 004a 0346     		mov	r3, r0
+  86              		.loc 1 79 9
+  87 004c 002B     		cmp	r3, #0
+  88 004e 11D1     		bne	.L2
+  80:./BSP/components/is42s32800j/is42s32800j.c ****       {
+  81:./BSP/components/is42s32800j/is42s32800j.c ****         /* Step 5: Program the external memory mode register */
+  82:./BSP/components/is42s32800j/is42s32800j.c ****         if(IS42S32800J_ModeRegConfig(Ctx, pRegMode) == IS42S32800J_OK)
+  89              		.loc 1 82 12
+ARM GAS  /tmp/cclcSZJb.s 			page 4
+
+
+  90 0050 3968     		ldr	r1, [r7]
+  91 0052 7868     		ldr	r0, [r7, #4]
+  92 0054 FFF7FEFF 		bl	IS42S32800J_ModeRegConfig
+  93 0058 0346     		mov	r3, r0
+  94              		.loc 1 82 11
+  95 005a 002B     		cmp	r3, #0
+  96 005c 0AD1     		bne	.L2
+  83:./BSP/components/is42s32800j/is42s32800j.c ****         {
+  84:./BSP/components/is42s32800j/is42s32800j.c ****           /* Step 6: Set the refresh rate counter */
+  85:./BSP/components/is42s32800j/is42s32800j.c ****           if(IS42S32800J_RefreshRate(Ctx, pRegMode->RefreshRate) == IS42S32800J_OK)
+  97              		.loc 1 85 14
+  98 005e 3B68     		ldr	r3, [r7]
+  99 0060 9B68     		ldr	r3, [r3, #8]
+ 100 0062 1946     		mov	r1, r3
+ 101 0064 7868     		ldr	r0, [r7, #4]
+ 102 0066 FFF7FEFF 		bl	IS42S32800J_RefreshRate
+ 103 006a 0346     		mov	r3, r0
+ 104              		.loc 1 85 13
+ 105 006c 002B     		cmp	r3, #0
+ 106 006e 01D1     		bne	.L2
+  86:./BSP/components/is42s32800j/is42s32800j.c ****           {
+  87:./BSP/components/is42s32800j/is42s32800j.c ****             ret = IS42S32800J_OK;
+ 107              		.loc 1 87 17
+ 108 0070 0023     		movs	r3, #0
+ 109 0072 FB60     		str	r3, [r7, #12]
+ 110              	.L2:
+  88:./BSP/components/is42s32800j/is42s32800j.c ****           }
+  89:./BSP/components/is42s32800j/is42s32800j.c ****         }
+  90:./BSP/components/is42s32800j/is42s32800j.c ****       }
+  91:./BSP/components/is42s32800j/is42s32800j.c ****     }
+  92:./BSP/components/is42s32800j/is42s32800j.c ****   } 
+  93:./BSP/components/is42s32800j/is42s32800j.c ****   return ret;
+ 111              		.loc 1 93 10
+ 112 0074 FB68     		ldr	r3, [r7, #12]
+  94:./BSP/components/is42s32800j/is42s32800j.c **** }
+ 113              		.loc 1 94 1
+ 114 0076 1846     		mov	r0, r3
+ 115 0078 1037     		adds	r7, r7, #16
+ 116              	.LCFI3:
+ 117              		.cfi_def_cfa_offset 8
+ 118 007a BD46     		mov	sp, r7
+ 119              	.LCFI4:
+ 120              		.cfi_def_cfa_register 13
+ 121              		@ sp needed
+ 122 007c 80BD     		pop	{r7, pc}
+ 123              		.cfi_endproc
+ 124              	.LFE331:
+ 126              		.section	.text.IS42S32800J_ClockEnable,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	IS42S32800J_ClockEnable
+ 129              		.syntax unified
+ 130              		.thumb
+ 131              		.thumb_func
+ 132              		.fpu fpv5-d16
+ 134              	IS42S32800J_ClockEnable:
+ 135              	.LFB332:
+  95:./BSP/components/is42s32800j/is42s32800j.c **** 
+ARM GAS  /tmp/cclcSZJb.s 			page 5
+
+
+  96:./BSP/components/is42s32800j/is42s32800j.c **** /**
+  97:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief  Enable SDRAM clock
+  98:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Ctx Component object pointer
+  99:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Interface Could be FMC_SDRAM_CMD_TARGET_BANK1 or FMC_SDRAM_CMD_TARGET_BANK2
+ 100:./BSP/components/is42s32800j/is42s32800j.c ****   * @retval error status
+ 101:./BSP/components/is42s32800j/is42s32800j.c ****   */
+ 102:./BSP/components/is42s32800j/is42s32800j.c **** int32_t IS42S32800J_ClockEnable(SDRAM_HandleTypeDef *Ctx, uint32_t Interface) 
+ 103:./BSP/components/is42s32800j/is42s32800j.c **** {
+ 136              		.loc 1 103 1
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 8
+ 139              		@ frame_needed = 1, uses_anonymous_args = 0
+ 140 0000 80B5     		push	{r7, lr}
+ 141              	.LCFI5:
+ 142              		.cfi_def_cfa_offset 8
+ 143              		.cfi_offset 7, -8
+ 144              		.cfi_offset 14, -4
+ 145 0002 82B0     		sub	sp, sp, #8
+ 146              	.LCFI6:
+ 147              		.cfi_def_cfa_offset 16
+ 148 0004 00AF     		add	r7, sp, #0
+ 149              	.LCFI7:
+ 150              		.cfi_def_cfa_register 7
+ 151 0006 7860     		str	r0, [r7, #4]
+ 152 0008 3960     		str	r1, [r7]
+ 104:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandMode            = IS42S32800J_CLK_ENABLE_CMD;
+ 153              		.loc 1 104 34
+ 154 000a 0E4B     		ldr	r3, .L7
+ 155 000c 0122     		movs	r2, #1
+ 156 000e 1A60     		str	r2, [r3]
+ 105:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandTarget          = Interface;
+ 157              		.loc 1 105 34
+ 158 0010 0C4A     		ldr	r2, .L7
+ 159 0012 3B68     		ldr	r3, [r7]
+ 160 0014 5360     		str	r3, [r2, #4]
+ 106:./BSP/components/is42s32800j/is42s32800j.c ****   Command.AutoRefreshNumber      = 1;
+ 161              		.loc 1 106 34
+ 162 0016 0B4B     		ldr	r3, .L7
+ 163 0018 0122     		movs	r2, #1
+ 164 001a 9A60     		str	r2, [r3, #8]
+ 107:./BSP/components/is42s32800j/is42s32800j.c ****   Command.ModeRegisterDefinition = 0;
+ 165              		.loc 1 107 34
+ 166 001c 094B     		ldr	r3, .L7
+ 167 001e 0022     		movs	r2, #0
+ 168 0020 DA60     		str	r2, [r3, #12]
+ 108:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 109:./BSP/components/is42s32800j/is42s32800j.c ****   /* Send the command */
+ 110:./BSP/components/is42s32800j/is42s32800j.c ****   if(HAL_SDRAM_SendCommand(Ctx, &Command, IS42S32800J_TIMEOUT) != HAL_OK)
+ 169              		.loc 1 110 6
+ 170 0022 4FF6FF72 		movw	r2, #65535
+ 171 0026 0749     		ldr	r1, .L7
+ 172 0028 7868     		ldr	r0, [r7, #4]
+ 173 002a FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 174 002e 0346     		mov	r3, r0
+ 175              		.loc 1 110 5
+ 176 0030 002B     		cmp	r3, #0
+ 177 0032 02D0     		beq	.L5
+ARM GAS  /tmp/cclcSZJb.s 			page 6
+
+
+ 111:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 112:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_ERROR;
+ 178              		.loc 1 112 12
+ 179 0034 4FF0FF33 		mov	r3, #-1
+ 180 0038 00E0     		b	.L6
+ 181              	.L5:
+ 113:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 114:./BSP/components/is42s32800j/is42s32800j.c ****   else
+ 115:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 116:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_OK;
+ 182              		.loc 1 116 12
+ 183 003a 0023     		movs	r3, #0
+ 184              	.L6:
+ 117:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 118:./BSP/components/is42s32800j/is42s32800j.c **** }
+ 185              		.loc 1 118 1
+ 186 003c 1846     		mov	r0, r3
+ 187 003e 0837     		adds	r7, r7, #8
+ 188              	.LCFI8:
+ 189              		.cfi_def_cfa_offset 8
+ 190 0040 BD46     		mov	sp, r7
+ 191              	.LCFI9:
+ 192              		.cfi_def_cfa_register 13
+ 193              		@ sp needed
+ 194 0042 80BD     		pop	{r7, pc}
+ 195              	.L8:
+ 196              		.align	2
+ 197              	.L7:
+ 198 0044 00000000 		.word	Command
+ 199              		.cfi_endproc
+ 200              	.LFE332:
+ 202              		.section	.text.IS42S32800J_Precharge,"ax",%progbits
+ 203              		.align	1
+ 204              		.global	IS42S32800J_Precharge
+ 205              		.syntax unified
+ 206              		.thumb
+ 207              		.thumb_func
+ 208              		.fpu fpv5-d16
+ 210              	IS42S32800J_Precharge:
+ 211              	.LFB333:
+ 119:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 120:./BSP/components/is42s32800j/is42s32800j.c **** /**
+ 121:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief  Precharge all sdram banks
+ 122:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Ctx Component object pointer
+ 123:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Interface Could be FMC_SDRAM_CMD_TARGET_BANK1 or FMC_SDRAM_CMD_TARGET_BANK2
+ 124:./BSP/components/is42s32800j/is42s32800j.c ****   * @retval error status
+ 125:./BSP/components/is42s32800j/is42s32800j.c ****   */
+ 126:./BSP/components/is42s32800j/is42s32800j.c **** int32_t IS42S32800J_Precharge(SDRAM_HandleTypeDef *Ctx, uint32_t Interface) 
+ 127:./BSP/components/is42s32800j/is42s32800j.c **** {
+ 212              		.loc 1 127 1
+ 213              		.cfi_startproc
+ 214              		@ args = 0, pretend = 0, frame = 8
+ 215              		@ frame_needed = 1, uses_anonymous_args = 0
+ 216 0000 80B5     		push	{r7, lr}
+ 217              	.LCFI10:
+ 218              		.cfi_def_cfa_offset 8
+ 219              		.cfi_offset 7, -8
+ARM GAS  /tmp/cclcSZJb.s 			page 7
+
+
+ 220              		.cfi_offset 14, -4
+ 221 0002 82B0     		sub	sp, sp, #8
+ 222              	.LCFI11:
+ 223              		.cfi_def_cfa_offset 16
+ 224 0004 00AF     		add	r7, sp, #0
+ 225              	.LCFI12:
+ 226              		.cfi_def_cfa_register 7
+ 227 0006 7860     		str	r0, [r7, #4]
+ 228 0008 3960     		str	r1, [r7]
+ 128:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandMode            = IS42S32800J_PALL_CMD;
+ 229              		.loc 1 128 34
+ 230 000a 0E4B     		ldr	r3, .L12
+ 231 000c 0222     		movs	r2, #2
+ 232 000e 1A60     		str	r2, [r3]
+ 129:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandTarget          = Interface;
+ 233              		.loc 1 129 34
+ 234 0010 0C4A     		ldr	r2, .L12
+ 235 0012 3B68     		ldr	r3, [r7]
+ 236 0014 5360     		str	r3, [r2, #4]
+ 130:./BSP/components/is42s32800j/is42s32800j.c ****   Command.AutoRefreshNumber      = 1;
+ 237              		.loc 1 130 34
+ 238 0016 0B4B     		ldr	r3, .L12
+ 239 0018 0122     		movs	r2, #1
+ 240 001a 9A60     		str	r2, [r3, #8]
+ 131:./BSP/components/is42s32800j/is42s32800j.c ****   Command.ModeRegisterDefinition = 0;
+ 241              		.loc 1 131 34
+ 242 001c 094B     		ldr	r3, .L12
+ 243 001e 0022     		movs	r2, #0
+ 244 0020 DA60     		str	r2, [r3, #12]
+ 132:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 133:./BSP/components/is42s32800j/is42s32800j.c ****   /* Send the command */
+ 134:./BSP/components/is42s32800j/is42s32800j.c ****   if(HAL_SDRAM_SendCommand(Ctx, &Command, IS42S32800J_TIMEOUT) != HAL_OK)
+ 245              		.loc 1 134 6
+ 246 0022 4FF6FF72 		movw	r2, #65535
+ 247 0026 0749     		ldr	r1, .L12
+ 248 0028 7868     		ldr	r0, [r7, #4]
+ 249 002a FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 250 002e 0346     		mov	r3, r0
+ 251              		.loc 1 134 5
+ 252 0030 002B     		cmp	r3, #0
+ 253 0032 02D0     		beq	.L10
+ 135:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 136:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_ERROR;
+ 254              		.loc 1 136 12
+ 255 0034 4FF0FF33 		mov	r3, #-1
+ 256 0038 00E0     		b	.L11
+ 257              	.L10:
+ 137:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 138:./BSP/components/is42s32800j/is42s32800j.c ****   else
+ 139:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 140:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_OK;
+ 258              		.loc 1 140 12
+ 259 003a 0023     		movs	r3, #0
+ 260              	.L11:
+ 141:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 142:./BSP/components/is42s32800j/is42s32800j.c **** }
+ 261              		.loc 1 142 1
+ARM GAS  /tmp/cclcSZJb.s 			page 8
+
+
+ 262 003c 1846     		mov	r0, r3
+ 263 003e 0837     		adds	r7, r7, #8
+ 264              	.LCFI13:
+ 265              		.cfi_def_cfa_offset 8
+ 266 0040 BD46     		mov	sp, r7
+ 267              	.LCFI14:
+ 268              		.cfi_def_cfa_register 13
+ 269              		@ sp needed
+ 270 0042 80BD     		pop	{r7, pc}
+ 271              	.L13:
+ 272              		.align	2
+ 273              	.L12:
+ 274 0044 00000000 		.word	Command
+ 275              		.cfi_endproc
+ 276              	.LFE333:
+ 278              		.section	.text.IS42S32800J_ModeRegConfig,"ax",%progbits
+ 279              		.align	1
+ 280              		.global	IS42S32800J_ModeRegConfig
+ 281              		.syntax unified
+ 282              		.thumb
+ 283              		.thumb_func
+ 284              		.fpu fpv5-d16
+ 286              	IS42S32800J_ModeRegConfig:
+ 287              	.LFB334:
+ 143:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 144:./BSP/components/is42s32800j/is42s32800j.c **** /**
+ 145:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief  Program the external memory mode register
+ 146:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Ctx Component object pointer
+ 147:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  pRegMode : Pointer to Register Mode structure
+ 148:./BSP/components/is42s32800j/is42s32800j.c ****   * @retval error status
+ 149:./BSP/components/is42s32800j/is42s32800j.c ****   */
+ 150:./BSP/components/is42s32800j/is42s32800j.c **** int32_t IS42S32800J_ModeRegConfig(SDRAM_HandleTypeDef *Ctx, IS42S32800J_Context_t *pRegMode) 
+ 151:./BSP/components/is42s32800j/is42s32800j.c **** {
+ 288              		.loc 1 151 1
+ 289              		.cfi_startproc
+ 290              		@ args = 0, pretend = 0, frame = 16
+ 291              		@ frame_needed = 1, uses_anonymous_args = 0
+ 292 0000 80B5     		push	{r7, lr}
+ 293              	.LCFI15:
+ 294              		.cfi_def_cfa_offset 8
+ 295              		.cfi_offset 7, -8
+ 296              		.cfi_offset 14, -4
+ 297 0002 84B0     		sub	sp, sp, #16
+ 298              	.LCFI16:
+ 299              		.cfi_def_cfa_offset 24
+ 300 0004 00AF     		add	r7, sp, #0
+ 301              	.LCFI17:
+ 302              		.cfi_def_cfa_register 7
+ 303 0006 7860     		str	r0, [r7, #4]
+ 304 0008 3960     		str	r1, [r7]
+ 152:./BSP/components/is42s32800j/is42s32800j.c ****   uint32_t tmpmrd;
+ 153:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 154:./BSP/components/is42s32800j/is42s32800j.c ****   /* Program the external memory mode register */
+ 155:./BSP/components/is42s32800j/is42s32800j.c ****   tmpmrd = (uint32_t)pRegMode->BurstLength   |\
+ 305              		.loc 1 155 30
+ 306 000a 3B68     		ldr	r3, [r7]
+ 307 000c DA68     		ldr	r2, [r3, #12]
+ARM GAS  /tmp/cclcSZJb.s 			page 9
+
+
+ 156:./BSP/components/is42s32800j/is42s32800j.c ****                      pRegMode->BurstType     |\
+ 308              		.loc 1 156 30
+ 309 000e 3B68     		ldr	r3, [r7]
+ 310 0010 1B69     		ldr	r3, [r3, #16]
+ 155:./BSP/components/is42s32800j/is42s32800j.c ****                      pRegMode->BurstType     |\
+ 311              		.loc 1 155 46
+ 312 0012 1A43     		orrs	r2, r2, r3
+ 157:./BSP/components/is42s32800j/is42s32800j.c ****                      pRegMode->CASLatency    |\
+ 313              		.loc 1 157 30
+ 314 0014 3B68     		ldr	r3, [r7]
+ 315 0016 5B69     		ldr	r3, [r3, #20]
+ 156:./BSP/components/is42s32800j/is42s32800j.c ****                      pRegMode->BurstType     |\
+ 316              		.loc 1 156 46
+ 317 0018 1A43     		orrs	r2, r2, r3
+ 158:./BSP/components/is42s32800j/is42s32800j.c ****                      pRegMode->OperationMode |\
+ 318              		.loc 1 158 30
+ 319 001a 3B68     		ldr	r3, [r7]
+ 320 001c 9B69     		ldr	r3, [r3, #24]
+ 157:./BSP/components/is42s32800j/is42s32800j.c ****                      pRegMode->CASLatency    |\
+ 321              		.loc 1 157 46
+ 322 001e 1A43     		orrs	r2, r2, r3
+ 159:./BSP/components/is42s32800j/is42s32800j.c ****                      pRegMode->WriteBurstMode;
+ 323              		.loc 1 159 30
+ 324 0020 3B68     		ldr	r3, [r7]
+ 325 0022 DB69     		ldr	r3, [r3, #28]
+ 155:./BSP/components/is42s32800j/is42s32800j.c ****                      pRegMode->BurstType     |\
+ 326              		.loc 1 155 10
+ 327 0024 1343     		orrs	r3, r3, r2
+ 328 0026 FB60     		str	r3, [r7, #12]
+ 160:./BSP/components/is42s32800j/is42s32800j.c ****   
+ 161:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandMode            = IS42S32800J_LOAD_MODE_CMD;
+ 329              		.loc 1 161 34
+ 330 0028 0E4B     		ldr	r3, .L17
+ 331 002a 0422     		movs	r2, #4
+ 332 002c 1A60     		str	r2, [r3]
+ 162:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandTarget          = pRegMode->TargetBank;
+ 333              		.loc 1 162 44
+ 334 002e 3B68     		ldr	r3, [r7]
+ 335 0030 1B68     		ldr	r3, [r3]
+ 336              		.loc 1 162 34
+ 337 0032 0C4A     		ldr	r2, .L17
+ 338 0034 5360     		str	r3, [r2, #4]
+ 163:./BSP/components/is42s32800j/is42s32800j.c ****   Command.AutoRefreshNumber      = 1;
+ 339              		.loc 1 163 34
+ 340 0036 0B4B     		ldr	r3, .L17
+ 341 0038 0122     		movs	r2, #1
+ 342 003a 9A60     		str	r2, [r3, #8]
+ 164:./BSP/components/is42s32800j/is42s32800j.c ****   Command.ModeRegisterDefinition = tmpmrd;
+ 343              		.loc 1 164 34
+ 344 003c 094A     		ldr	r2, .L17
+ 345 003e FB68     		ldr	r3, [r7, #12]
+ 346 0040 D360     		str	r3, [r2, #12]
+ 165:./BSP/components/is42s32800j/is42s32800j.c ****   
+ 166:./BSP/components/is42s32800j/is42s32800j.c ****   /* Send the command */
+ 167:./BSP/components/is42s32800j/is42s32800j.c ****   if(HAL_SDRAM_SendCommand(Ctx, &Command, IS42S32800J_TIMEOUT) != HAL_OK)
+ 347              		.loc 1 167 6
+ 348 0042 4FF6FF72 		movw	r2, #65535
+ARM GAS  /tmp/cclcSZJb.s 			page 10
+
+
+ 349 0046 0749     		ldr	r1, .L17
+ 350 0048 7868     		ldr	r0, [r7, #4]
+ 351 004a FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 352 004e 0346     		mov	r3, r0
+ 353              		.loc 1 167 5
+ 354 0050 002B     		cmp	r3, #0
+ 355 0052 02D0     		beq	.L15
+ 168:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 169:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_ERROR;
+ 356              		.loc 1 169 12
+ 357 0054 4FF0FF33 		mov	r3, #-1
+ 358 0058 00E0     		b	.L16
+ 359              	.L15:
+ 170:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 171:./BSP/components/is42s32800j/is42s32800j.c ****   else
+ 172:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 173:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_OK;
+ 360              		.loc 1 173 12
+ 361 005a 0023     		movs	r3, #0
+ 362              	.L16:
+ 174:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 175:./BSP/components/is42s32800j/is42s32800j.c **** }
+ 363              		.loc 1 175 1
+ 364 005c 1846     		mov	r0, r3
+ 365 005e 1037     		adds	r7, r7, #16
+ 366              	.LCFI18:
+ 367              		.cfi_def_cfa_offset 8
+ 368 0060 BD46     		mov	sp, r7
+ 369              	.LCFI19:
+ 370              		.cfi_def_cfa_register 13
+ 371              		@ sp needed
+ 372 0062 80BD     		pop	{r7, pc}
+ 373              	.L18:
+ 374              		.align	2
+ 375              	.L17:
+ 376 0064 00000000 		.word	Command
+ 377              		.cfi_endproc
+ 378              	.LFE334:
+ 380              		.section	.text.IS42S32800J_TimingConfig,"ax",%progbits
+ 381              		.align	1
+ 382              		.global	IS42S32800J_TimingConfig
+ 383              		.syntax unified
+ 384              		.thumb
+ 385              		.thumb_func
+ 386              		.fpu fpv5-d16
+ 388              	IS42S32800J_TimingConfig:
+ 389              	.LFB335:
+ 176:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 177:./BSP/components/is42s32800j/is42s32800j.c **** /**
+ 178:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief  Program the SDRAM timing
+ 179:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Ctx Component object pointer
+ 180:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  pTiming Pointer to SDRAM timing configuration structure
+ 181:./BSP/components/is42s32800j/is42s32800j.c ****   * @retval error status
+ 182:./BSP/components/is42s32800j/is42s32800j.c ****   */
+ 183:./BSP/components/is42s32800j/is42s32800j.c **** int32_t IS42S32800J_TimingConfig(SDRAM_HandleTypeDef *Ctx, FMC_SDRAM_TimingTypeDef *pTiming) 
+ 184:./BSP/components/is42s32800j/is42s32800j.c **** {
+ 390              		.loc 1 184 1
+ARM GAS  /tmp/cclcSZJb.s 			page 11
+
+
+ 391              		.cfi_startproc
+ 392              		@ args = 0, pretend = 0, frame = 8
+ 393              		@ frame_needed = 1, uses_anonymous_args = 0
+ 394 0000 80B5     		push	{r7, lr}
+ 395              	.LCFI20:
+ 396              		.cfi_def_cfa_offset 8
+ 397              		.cfi_offset 7, -8
+ 398              		.cfi_offset 14, -4
+ 399 0002 82B0     		sub	sp, sp, #8
+ 400              	.LCFI21:
+ 401              		.cfi_def_cfa_offset 16
+ 402 0004 00AF     		add	r7, sp, #0
+ 403              	.LCFI22:
+ 404              		.cfi_def_cfa_register 7
+ 405 0006 7860     		str	r0, [r7, #4]
+ 406 0008 3960     		str	r1, [r7]
+ 185:./BSP/components/is42s32800j/is42s32800j.c ****   /* Program the SDRAM timing */
+ 186:./BSP/components/is42s32800j/is42s32800j.c ****   if(HAL_SDRAM_Init(Ctx, pTiming) != HAL_OK)
+ 407              		.loc 1 186 6
+ 408 000a 3968     		ldr	r1, [r7]
+ 409 000c 7868     		ldr	r0, [r7, #4]
+ 410 000e FFF7FEFF 		bl	HAL_SDRAM_Init
+ 411 0012 0346     		mov	r3, r0
+ 412              		.loc 1 186 5
+ 413 0014 002B     		cmp	r3, #0
+ 414 0016 02D0     		beq	.L20
+ 187:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 188:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_ERROR;
+ 415              		.loc 1 188 12
+ 416 0018 4FF0FF33 		mov	r3, #-1
+ 417 001c 00E0     		b	.L21
+ 418              	.L20:
+ 189:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 190:./BSP/components/is42s32800j/is42s32800j.c ****   else
+ 191:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 192:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_OK;
+ 419              		.loc 1 192 12
+ 420 001e 0023     		movs	r3, #0
+ 421              	.L21:
+ 193:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 194:./BSP/components/is42s32800j/is42s32800j.c **** }
+ 422              		.loc 1 194 1
+ 423 0020 1846     		mov	r0, r3
+ 424 0022 0837     		adds	r7, r7, #8
+ 425              	.LCFI23:
+ 426              		.cfi_def_cfa_offset 8
+ 427 0024 BD46     		mov	sp, r7
+ 428              	.LCFI24:
+ 429              		.cfi_def_cfa_register 13
+ 430              		@ sp needed
+ 431 0026 80BD     		pop	{r7, pc}
+ 432              		.cfi_endproc
+ 433              	.LFE335:
+ 435              		.section	.text.IS42S32800J_RefreshMode,"ax",%progbits
+ 436              		.align	1
+ 437              		.global	IS42S32800J_RefreshMode
+ 438              		.syntax unified
+ARM GAS  /tmp/cclcSZJb.s 			page 12
+
+
+ 439              		.thumb
+ 440              		.thumb_func
+ 441              		.fpu fpv5-d16
+ 443              	IS42S32800J_RefreshMode:
+ 444              	.LFB336:
+ 195:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 196:./BSP/components/is42s32800j/is42s32800j.c **** /**
+ 197:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief  Configure Refresh mode
+ 198:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Ctx Component object pointer
+ 199:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Interface Could be FMC_SDRAM_CMD_TARGET_BANK1 or FMC_SDRAM_CMD_TARGET_BANK2 
+ 200:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  RefreshMode Could be IS42S32800J_CMD_AUTOREFRESH_MODE or
+ 201:./BSP/components/is42s32800j/is42s32800j.c ****   *                      IS42S32800J_CMD_SELFREFRESH_MODE
+ 202:./BSP/components/is42s32800j/is42s32800j.c ****   * @retval error status
+ 203:./BSP/components/is42s32800j/is42s32800j.c ****   */
+ 204:./BSP/components/is42s32800j/is42s32800j.c **** int32_t IS42S32800J_RefreshMode(SDRAM_HandleTypeDef *Ctx, uint32_t Interface, uint32_t RefreshMode)
+ 205:./BSP/components/is42s32800j/is42s32800j.c **** {
+ 445              		.loc 1 205 1
+ 446              		.cfi_startproc
+ 447              		@ args = 0, pretend = 0, frame = 16
+ 448              		@ frame_needed = 1, uses_anonymous_args = 0
+ 449 0000 80B5     		push	{r7, lr}
+ 450              	.LCFI25:
+ 451              		.cfi_def_cfa_offset 8
+ 452              		.cfi_offset 7, -8
+ 453              		.cfi_offset 14, -4
+ 454 0002 84B0     		sub	sp, sp, #16
+ 455              	.LCFI26:
+ 456              		.cfi_def_cfa_offset 24
+ 457 0004 00AF     		add	r7, sp, #0
+ 458              	.LCFI27:
+ 459              		.cfi_def_cfa_register 7
+ 460 0006 F860     		str	r0, [r7, #12]
+ 461 0008 B960     		str	r1, [r7, #8]
+ 462 000a 7A60     		str	r2, [r7, #4]
+ 206:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandMode            = RefreshMode;
+ 463              		.loc 1 206 34
+ 464 000c 0E4A     		ldr	r2, .L25
+ 465 000e 7B68     		ldr	r3, [r7, #4]
+ 466 0010 1360     		str	r3, [r2]
+ 207:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandTarget          = Interface;
+ 467              		.loc 1 207 34
+ 468 0012 0D4A     		ldr	r2, .L25
+ 469 0014 BB68     		ldr	r3, [r7, #8]
+ 470 0016 5360     		str	r3, [r2, #4]
+ 208:./BSP/components/is42s32800j/is42s32800j.c ****   Command.AutoRefreshNumber      = 8;
+ 471              		.loc 1 208 34
+ 472 0018 0B4B     		ldr	r3, .L25
+ 473 001a 0822     		movs	r2, #8
+ 474 001c 9A60     		str	r2, [r3, #8]
+ 209:./BSP/components/is42s32800j/is42s32800j.c ****   Command.ModeRegisterDefinition = 0;
+ 475              		.loc 1 209 34
+ 476 001e 0A4B     		ldr	r3, .L25
+ 477 0020 0022     		movs	r2, #0
+ 478 0022 DA60     		str	r2, [r3, #12]
+ 210:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 211:./BSP/components/is42s32800j/is42s32800j.c ****   /* Send the command */
+ 212:./BSP/components/is42s32800j/is42s32800j.c ****   if(HAL_SDRAM_SendCommand(Ctx, &Command, IS42S32800J_TIMEOUT) != HAL_OK)
+ARM GAS  /tmp/cclcSZJb.s 			page 13
+
+
+ 479              		.loc 1 212 6
+ 480 0024 4FF6FF72 		movw	r2, #65535
+ 481 0028 0749     		ldr	r1, .L25
+ 482 002a F868     		ldr	r0, [r7, #12]
+ 483 002c FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 484 0030 0346     		mov	r3, r0
+ 485              		.loc 1 212 5
+ 486 0032 002B     		cmp	r3, #0
+ 487 0034 02D0     		beq	.L23
+ 213:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 214:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_ERROR;
+ 488              		.loc 1 214 12
+ 489 0036 4FF0FF33 		mov	r3, #-1
+ 490 003a 00E0     		b	.L24
+ 491              	.L23:
+ 215:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 216:./BSP/components/is42s32800j/is42s32800j.c ****   else
+ 217:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 218:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_OK;
+ 492              		.loc 1 218 12
+ 493 003c 0023     		movs	r3, #0
+ 494              	.L24:
+ 219:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 220:./BSP/components/is42s32800j/is42s32800j.c **** }
+ 495              		.loc 1 220 1
+ 496 003e 1846     		mov	r0, r3
+ 497 0040 1037     		adds	r7, r7, #16
+ 498              	.LCFI28:
+ 499              		.cfi_def_cfa_offset 8
+ 500 0042 BD46     		mov	sp, r7
+ 501              	.LCFI29:
+ 502              		.cfi_def_cfa_register 13
+ 503              		@ sp needed
+ 504 0044 80BD     		pop	{r7, pc}
+ 505              	.L26:
+ 506 0046 00BF     		.align	2
+ 507              	.L25:
+ 508 0048 00000000 		.word	Command
+ 509              		.cfi_endproc
+ 510              	.LFE336:
+ 512              		.section	.text.IS42S32800J_RefreshRate,"ax",%progbits
+ 513              		.align	1
+ 514              		.global	IS42S32800J_RefreshRate
+ 515              		.syntax unified
+ 516              		.thumb
+ 517              		.thumb_func
+ 518              		.fpu fpv5-d16
+ 520              	IS42S32800J_RefreshRate:
+ 521              	.LFB337:
+ 221:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 222:./BSP/components/is42s32800j/is42s32800j.c **** /**
+ 223:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief  Set the device refresh rate
+ 224:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Ctx Component object pointer
+ 225:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  RefreshCount The refresh rate to be programmed
+ 226:./BSP/components/is42s32800j/is42s32800j.c ****   * @retval error status
+ 227:./BSP/components/is42s32800j/is42s32800j.c ****   */
+ 228:./BSP/components/is42s32800j/is42s32800j.c **** int32_t IS42S32800J_RefreshRate(SDRAM_HandleTypeDef *Ctx, uint32_t RefreshCount) 
+ARM GAS  /tmp/cclcSZJb.s 			page 14
+
+
+ 229:./BSP/components/is42s32800j/is42s32800j.c **** {
+ 522              		.loc 1 229 1
+ 523              		.cfi_startproc
+ 524              		@ args = 0, pretend = 0, frame = 8
+ 525              		@ frame_needed = 1, uses_anonymous_args = 0
+ 526 0000 80B5     		push	{r7, lr}
+ 527              	.LCFI30:
+ 528              		.cfi_def_cfa_offset 8
+ 529              		.cfi_offset 7, -8
+ 530              		.cfi_offset 14, -4
+ 531 0002 82B0     		sub	sp, sp, #8
+ 532              	.LCFI31:
+ 533              		.cfi_def_cfa_offset 16
+ 534 0004 00AF     		add	r7, sp, #0
+ 535              	.LCFI32:
+ 536              		.cfi_def_cfa_register 7
+ 537 0006 7860     		str	r0, [r7, #4]
+ 538 0008 3960     		str	r1, [r7]
+ 230:./BSP/components/is42s32800j/is42s32800j.c ****   /* Set the device refresh rate */
+ 231:./BSP/components/is42s32800j/is42s32800j.c ****   if(HAL_SDRAM_ProgramRefreshRate(Ctx, RefreshCount) != HAL_OK)
+ 539              		.loc 1 231 6
+ 540 000a 3968     		ldr	r1, [r7]
+ 541 000c 7868     		ldr	r0, [r7, #4]
+ 542 000e FFF7FEFF 		bl	HAL_SDRAM_ProgramRefreshRate
+ 543 0012 0346     		mov	r3, r0
+ 544              		.loc 1 231 5
+ 545 0014 002B     		cmp	r3, #0
+ 546 0016 02D0     		beq	.L28
+ 232:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 233:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_ERROR;
+ 547              		.loc 1 233 12
+ 548 0018 4FF0FF33 		mov	r3, #-1
+ 549 001c 00E0     		b	.L29
+ 550              	.L28:
+ 234:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 235:./BSP/components/is42s32800j/is42s32800j.c ****   else
+ 236:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 237:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_OK;
+ 551              		.loc 1 237 12
+ 552 001e 0023     		movs	r3, #0
+ 553              	.L29:
+ 238:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 239:./BSP/components/is42s32800j/is42s32800j.c **** }
+ 554              		.loc 1 239 1
+ 555 0020 1846     		mov	r0, r3
+ 556 0022 0837     		adds	r7, r7, #8
+ 557              	.LCFI33:
+ 558              		.cfi_def_cfa_offset 8
+ 559 0024 BD46     		mov	sp, r7
+ 560              	.LCFI34:
+ 561              		.cfi_def_cfa_register 13
+ 562              		@ sp needed
+ 563 0026 80BD     		pop	{r7, pc}
+ 564              		.cfi_endproc
+ 565              	.LFE337:
+ 567              		.section	.text.IS42S32800J_EnterPowerMode,"ax",%progbits
+ 568              		.align	1
+ARM GAS  /tmp/cclcSZJb.s 			page 15
+
+
+ 569              		.global	IS42S32800J_EnterPowerMode
+ 570              		.syntax unified
+ 571              		.thumb
+ 572              		.thumb_func
+ 573              		.fpu fpv5-d16
+ 575              	IS42S32800J_EnterPowerMode:
+ 576              	.LFB338:
+ 240:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 241:./BSP/components/is42s32800j/is42s32800j.c **** /**
+ 242:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief  Enter Power mode
+ 243:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Ctx Component object pointer
+ 244:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Interface Could be FMC_SDRAM_CMD_TARGET_BANK1 or FMC_SDRAM_CMD_TARGET_BANK2
+ 245:./BSP/components/is42s32800j/is42s32800j.c ****   * @retval error status
+ 246:./BSP/components/is42s32800j/is42s32800j.c ****   */
+ 247:./BSP/components/is42s32800j/is42s32800j.c **** int32_t IS42S32800J_EnterPowerMode(SDRAM_HandleTypeDef *Ctx, uint32_t Interface) 
+ 248:./BSP/components/is42s32800j/is42s32800j.c **** {
+ 577              		.loc 1 248 1
+ 578              		.cfi_startproc
+ 579              		@ args = 0, pretend = 0, frame = 8
+ 580              		@ frame_needed = 1, uses_anonymous_args = 0
+ 581 0000 80B5     		push	{r7, lr}
+ 582              	.LCFI35:
+ 583              		.cfi_def_cfa_offset 8
+ 584              		.cfi_offset 7, -8
+ 585              		.cfi_offset 14, -4
+ 586 0002 82B0     		sub	sp, sp, #8
+ 587              	.LCFI36:
+ 588              		.cfi_def_cfa_offset 16
+ 589 0004 00AF     		add	r7, sp, #0
+ 590              	.LCFI37:
+ 591              		.cfi_def_cfa_register 7
+ 592 0006 7860     		str	r0, [r7, #4]
+ 593 0008 3960     		str	r1, [r7]
+ 249:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandMode            = IS42S32800J_POWERDOWN_MODE_CMD;
+ 594              		.loc 1 249 34
+ 595 000a 0E4B     		ldr	r3, .L33
+ 596 000c 0622     		movs	r2, #6
+ 597 000e 1A60     		str	r2, [r3]
+ 250:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandTarget          = Interface;
+ 598              		.loc 1 250 34
+ 599 0010 0C4A     		ldr	r2, .L33
+ 600 0012 3B68     		ldr	r3, [r7]
+ 601 0014 5360     		str	r3, [r2, #4]
+ 251:./BSP/components/is42s32800j/is42s32800j.c ****   Command.AutoRefreshNumber      = 1;
+ 602              		.loc 1 251 34
+ 603 0016 0B4B     		ldr	r3, .L33
+ 604 0018 0122     		movs	r2, #1
+ 605 001a 9A60     		str	r2, [r3, #8]
+ 252:./BSP/components/is42s32800j/is42s32800j.c ****   Command.ModeRegisterDefinition = 0;
+ 606              		.loc 1 252 34
+ 607 001c 094B     		ldr	r3, .L33
+ 608 001e 0022     		movs	r2, #0
+ 609 0020 DA60     		str	r2, [r3, #12]
+ 253:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 254:./BSP/components/is42s32800j/is42s32800j.c ****   /* Send the command */
+ 255:./BSP/components/is42s32800j/is42s32800j.c ****   if(HAL_SDRAM_SendCommand(Ctx, &Command, IS42S32800J_TIMEOUT) != HAL_OK)
+ 610              		.loc 1 255 6
+ARM GAS  /tmp/cclcSZJb.s 			page 16
+
+
+ 611 0022 4FF6FF72 		movw	r2, #65535
+ 612 0026 0749     		ldr	r1, .L33
+ 613 0028 7868     		ldr	r0, [r7, #4]
+ 614 002a FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 615 002e 0346     		mov	r3, r0
+ 616              		.loc 1 255 5
+ 617 0030 002B     		cmp	r3, #0
+ 618 0032 02D0     		beq	.L31
+ 256:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 257:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_ERROR;
+ 619              		.loc 1 257 12
+ 620 0034 4FF0FF33 		mov	r3, #-1
+ 621 0038 00E0     		b	.L32
+ 622              	.L31:
+ 258:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 259:./BSP/components/is42s32800j/is42s32800j.c ****   else
+ 260:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 261:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_OK;
+ 623              		.loc 1 261 12
+ 624 003a 0023     		movs	r3, #0
+ 625              	.L32:
+ 262:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 263:./BSP/components/is42s32800j/is42s32800j.c **** }
+ 626              		.loc 1 263 1
+ 627 003c 1846     		mov	r0, r3
+ 628 003e 0837     		adds	r7, r7, #8
+ 629              	.LCFI38:
+ 630              		.cfi_def_cfa_offset 8
+ 631 0040 BD46     		mov	sp, r7
+ 632              	.LCFI39:
+ 633              		.cfi_def_cfa_register 13
+ 634              		@ sp needed
+ 635 0042 80BD     		pop	{r7, pc}
+ 636              	.L34:
+ 637              		.align	2
+ 638              	.L33:
+ 639 0044 00000000 		.word	Command
+ 640              		.cfi_endproc
+ 641              	.LFE338:
+ 643              		.section	.text.IS42S32800J_ExitPowerMode,"ax",%progbits
+ 644              		.align	1
+ 645              		.global	IS42S32800J_ExitPowerMode
+ 646              		.syntax unified
+ 647              		.thumb
+ 648              		.thumb_func
+ 649              		.fpu fpv5-d16
+ 651              	IS42S32800J_ExitPowerMode:
+ 652              	.LFB339:
+ 264:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 265:./BSP/components/is42s32800j/is42s32800j.c **** /**
+ 266:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief  Exit Power mode
+ 267:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Ctx Component object pointer
+ 268:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Interface Could be FMC_SDRAM_CMD_TARGET_BANK1 or FMC_SDRAM_CMD_TARGET_BANK2
+ 269:./BSP/components/is42s32800j/is42s32800j.c ****   * @retval error status
+ 270:./BSP/components/is42s32800j/is42s32800j.c ****   */
+ 271:./BSP/components/is42s32800j/is42s32800j.c **** int32_t IS42S32800J_ExitPowerMode(SDRAM_HandleTypeDef *Ctx, uint32_t Interface) 
+ 272:./BSP/components/is42s32800j/is42s32800j.c **** {
+ARM GAS  /tmp/cclcSZJb.s 			page 17
+
+
+ 653              		.loc 1 272 1
+ 654              		.cfi_startproc
+ 655              		@ args = 0, pretend = 0, frame = 8
+ 656              		@ frame_needed = 1, uses_anonymous_args = 0
+ 657 0000 80B5     		push	{r7, lr}
+ 658              	.LCFI40:
+ 659              		.cfi_def_cfa_offset 8
+ 660              		.cfi_offset 7, -8
+ 661              		.cfi_offset 14, -4
+ 662 0002 82B0     		sub	sp, sp, #8
+ 663              	.LCFI41:
+ 664              		.cfi_def_cfa_offset 16
+ 665 0004 00AF     		add	r7, sp, #0
+ 666              	.LCFI42:
+ 667              		.cfi_def_cfa_register 7
+ 668 0006 7860     		str	r0, [r7, #4]
+ 669 0008 3960     		str	r1, [r7]
+ 273:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandMode            = IS42S32800J_NORMAL_MODE_CMD;
+ 670              		.loc 1 273 34
+ 671 000a 0E4B     		ldr	r3, .L38
+ 672 000c 0022     		movs	r2, #0
+ 673 000e 1A60     		str	r2, [r3]
+ 274:./BSP/components/is42s32800j/is42s32800j.c ****   Command.CommandTarget          = Interface;
+ 674              		.loc 1 274 34
+ 675 0010 0C4A     		ldr	r2, .L38
+ 676 0012 3B68     		ldr	r3, [r7]
+ 677 0014 5360     		str	r3, [r2, #4]
+ 275:./BSP/components/is42s32800j/is42s32800j.c ****   Command.AutoRefreshNumber      = 1;
+ 678              		.loc 1 275 34
+ 679 0016 0B4B     		ldr	r3, .L38
+ 680 0018 0122     		movs	r2, #1
+ 681 001a 9A60     		str	r2, [r3, #8]
+ 276:./BSP/components/is42s32800j/is42s32800j.c ****   Command.ModeRegisterDefinition = 0;
+ 682              		.loc 1 276 34
+ 683 001c 094B     		ldr	r3, .L38
+ 684 001e 0022     		movs	r2, #0
+ 685 0020 DA60     		str	r2, [r3, #12]
+ 277:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 278:./BSP/components/is42s32800j/is42s32800j.c ****   /* Send the command */
+ 279:./BSP/components/is42s32800j/is42s32800j.c ****   if(HAL_SDRAM_SendCommand(Ctx, &Command, IS42S32800J_TIMEOUT) != HAL_OK)
+ 686              		.loc 1 279 6
+ 687 0022 4FF6FF72 		movw	r2, #65535
+ 688 0026 0749     		ldr	r1, .L38
+ 689 0028 7868     		ldr	r0, [r7, #4]
+ 690 002a FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 691 002e 0346     		mov	r3, r0
+ 692              		.loc 1 279 5
+ 693 0030 002B     		cmp	r3, #0
+ 694 0032 02D0     		beq	.L36
+ 280:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 281:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_ERROR;
+ 695              		.loc 1 281 12
+ 696 0034 4FF0FF33 		mov	r3, #-1
+ 697 0038 00E0     		b	.L37
+ 698              	.L36:
+ 282:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 283:./BSP/components/is42s32800j/is42s32800j.c ****   else
+ARM GAS  /tmp/cclcSZJb.s 			page 18
+
+
+ 284:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 285:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_OK;
+ 699              		.loc 1 285 12
+ 700 003a 0023     		movs	r3, #0
+ 701              	.L37:
+ 286:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 287:./BSP/components/is42s32800j/is42s32800j.c **** }
+ 702              		.loc 1 287 1
+ 703 003c 1846     		mov	r0, r3
+ 704 003e 0837     		adds	r7, r7, #8
+ 705              	.LCFI43:
+ 706              		.cfi_def_cfa_offset 8
+ 707 0040 BD46     		mov	sp, r7
+ 708              	.LCFI44:
+ 709              		.cfi_def_cfa_register 13
+ 710              		@ sp needed
+ 711 0042 80BD     		pop	{r7, pc}
+ 712              	.L39:
+ 713              		.align	2
+ 714              	.L38:
+ 715 0044 00000000 		.word	Command
+ 716              		.cfi_endproc
+ 717              	.LFE339:
+ 719              		.section	.text.IS42S32800J_Sendcmd,"ax",%progbits
+ 720              		.align	1
+ 721              		.global	IS42S32800J_Sendcmd
+ 722              		.syntax unified
+ 723              		.thumb
+ 724              		.thumb_func
+ 725              		.fpu fpv5-d16
+ 727              	IS42S32800J_Sendcmd:
+ 728              	.LFB340:
+ 288:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 289:./BSP/components/is42s32800j/is42s32800j.c **** /**
+ 290:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief  Sends command to the SDRAM bank.
+ 291:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  Ctx Component object pointer
+ 292:./BSP/components/is42s32800j/is42s32800j.c ****   * @param  SdramCmd : Pointer to SDRAM command structure 
+ 293:./BSP/components/is42s32800j/is42s32800j.c ****   * @retval SDRAM status
+ 294:./BSP/components/is42s32800j/is42s32800j.c ****   */  
+ 295:./BSP/components/is42s32800j/is42s32800j.c **** int32_t IS42S32800J_Sendcmd(SDRAM_HandleTypeDef *Ctx, FMC_SDRAM_CommandTypeDef *SdramCmd)
+ 296:./BSP/components/is42s32800j/is42s32800j.c **** {
+ 729              		.loc 1 296 1
+ 730              		.cfi_startproc
+ 731              		@ args = 0, pretend = 0, frame = 8
+ 732              		@ frame_needed = 1, uses_anonymous_args = 0
+ 733 0000 80B5     		push	{r7, lr}
+ 734              	.LCFI45:
+ 735              		.cfi_def_cfa_offset 8
+ 736              		.cfi_offset 7, -8
+ 737              		.cfi_offset 14, -4
+ 738 0002 82B0     		sub	sp, sp, #8
+ 739              	.LCFI46:
+ 740              		.cfi_def_cfa_offset 16
+ 741 0004 00AF     		add	r7, sp, #0
+ 742              	.LCFI47:
+ 743              		.cfi_def_cfa_register 7
+ 744 0006 7860     		str	r0, [r7, #4]
+ARM GAS  /tmp/cclcSZJb.s 			page 19
+
+
+ 745 0008 3960     		str	r1, [r7]
+ 297:./BSP/components/is42s32800j/is42s32800j.c ****   if(HAL_SDRAM_SendCommand(Ctx, SdramCmd, IS42S32800J_TIMEOUT) != HAL_OK)
+ 746              		.loc 1 297 6
+ 747 000a 4FF6FF72 		movw	r2, #65535
+ 748 000e 3968     		ldr	r1, [r7]
+ 749 0010 7868     		ldr	r0, [r7, #4]
+ 750 0012 FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 751 0016 0346     		mov	r3, r0
+ 752              		.loc 1 297 5
+ 753 0018 002B     		cmp	r3, #0
+ 754 001a 02D0     		beq	.L41
+ 298:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 299:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_ERROR;
+ 755              		.loc 1 299 12
+ 756 001c 4FF0FF33 		mov	r3, #-1
+ 757 0020 00E0     		b	.L42
+ 758              	.L41:
+ 300:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 301:./BSP/components/is42s32800j/is42s32800j.c ****   else
+ 302:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 303:./BSP/components/is42s32800j/is42s32800j.c ****     return IS42S32800J_OK;
+ 759              		.loc 1 303 12
+ 760 0022 0023     		movs	r3, #0
+ 761              	.L42:
+ 304:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 305:./BSP/components/is42s32800j/is42s32800j.c **** }
+ 762              		.loc 1 305 1
+ 763 0024 1846     		mov	r0, r3
+ 764 0026 0837     		adds	r7, r7, #8
+ 765              	.LCFI48:
+ 766              		.cfi_def_cfa_offset 8
+ 767 0028 BD46     		mov	sp, r7
+ 768              	.LCFI49:
+ 769              		.cfi_def_cfa_register 13
+ 770              		@ sp needed
+ 771 002a 80BD     		pop	{r7, pc}
+ 772              		.cfi_endproc
+ 773              	.LFE340:
+ 775              		.section	.text.IS42S32800J_Delay,"ax",%progbits
+ 776              		.align	1
+ 777              		.syntax unified
+ 778              		.thumb
+ 779              		.thumb_func
+ 780              		.fpu fpv5-d16
+ 782              	IS42S32800J_Delay:
+ 783              	.LFB341:
+ 306:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 307:./BSP/components/is42s32800j/is42s32800j.c **** /**
+ 308:./BSP/components/is42s32800j/is42s32800j.c ****   * @}
+ 309:./BSP/components/is42s32800j/is42s32800j.c ****   */ 
+ 310:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 311:./BSP/components/is42s32800j/is42s32800j.c **** /** @defgroup IS42S32800J_Private_Functions IS42S32800J Private Functions
+ 312:./BSP/components/is42s32800j/is42s32800j.c ****   * @{
+ 313:./BSP/components/is42s32800j/is42s32800j.c ****   */ 
+ 314:./BSP/components/is42s32800j/is42s32800j.c **** 
+ 315:./BSP/components/is42s32800j/is42s32800j.c **** /**
+ 316:./BSP/components/is42s32800j/is42s32800j.c ****   * @brief This function provides accurate delay (in milliseconds)
+ARM GAS  /tmp/cclcSZJb.s 			page 20
+
+
+ 317:./BSP/components/is42s32800j/is42s32800j.c ****   * @param Delay : specifies the delay time length, in milliseconds
+ 318:./BSP/components/is42s32800j/is42s32800j.c ****   * @retval IS42S32800J_OK
+ 319:./BSP/components/is42s32800j/is42s32800j.c ****   */
+ 320:./BSP/components/is42s32800j/is42s32800j.c **** static int32_t IS42S32800J_Delay(uint32_t Delay)
+ 321:./BSP/components/is42s32800j/is42s32800j.c **** {  
+ 784              		.loc 1 321 1
+ 785              		.cfi_startproc
+ 786              		@ args = 0, pretend = 0, frame = 16
+ 787              		@ frame_needed = 1, uses_anonymous_args = 0
+ 788 0000 80B5     		push	{r7, lr}
+ 789              	.LCFI50:
+ 790              		.cfi_def_cfa_offset 8
+ 791              		.cfi_offset 7, -8
+ 792              		.cfi_offset 14, -4
+ 793 0002 84B0     		sub	sp, sp, #16
+ 794              	.LCFI51:
+ 795              		.cfi_def_cfa_offset 24
+ 796 0004 00AF     		add	r7, sp, #0
+ 797              	.LCFI52:
+ 798              		.cfi_def_cfa_register 7
+ 799 0006 7860     		str	r0, [r7, #4]
+ 322:./BSP/components/is42s32800j/is42s32800j.c ****   uint32_t tickstart;
+ 323:./BSP/components/is42s32800j/is42s32800j.c ****   tickstart = HAL_GetTick();
+ 800              		.loc 1 323 15
+ 801 0008 FFF7FEFF 		bl	HAL_GetTick
+ 802 000c F860     		str	r0, [r7, #12]
+ 324:./BSP/components/is42s32800j/is42s32800j.c ****   while((HAL_GetTick() - tickstart) < Delay)
+ 803              		.loc 1 324 8
+ 804 000e 00BF     		nop
+ 805              	.L44:
+ 806              		.loc 1 324 10 discriminator 1
+ 807 0010 FFF7FEFF 		bl	HAL_GetTick
+ 808 0014 0246     		mov	r2, r0
+ 809              		.loc 1 324 24 discriminator 1
+ 810 0016 FB68     		ldr	r3, [r7, #12]
+ 811 0018 D31A     		subs	r3, r2, r3
+ 812              		.loc 1 324 8 discriminator 1
+ 813 001a 7A68     		ldr	r2, [r7, #4]
+ 814 001c 9A42     		cmp	r2, r3
+ 815 001e F7D8     		bhi	.L44
+ 325:./BSP/components/is42s32800j/is42s32800j.c ****   {
+ 326:./BSP/components/is42s32800j/is42s32800j.c ****   }
+ 327:./BSP/components/is42s32800j/is42s32800j.c ****   return IS42S32800J_OK;
+ 816              		.loc 1 327 10
+ 817 0020 0023     		movs	r3, #0
+ 328:./BSP/components/is42s32800j/is42s32800j.c **** }
+ 818              		.loc 1 328 1
+ 819 0022 1846     		mov	r0, r3
+ 820 0024 1037     		adds	r7, r7, #16
+ 821              	.LCFI53:
+ 822              		.cfi_def_cfa_offset 8
+ 823 0026 BD46     		mov	sp, r7
+ 824              	.LCFI54:
+ 825              		.cfi_def_cfa_register 13
+ 826              		@ sp needed
+ 827 0028 80BD     		pop	{r7, pc}
+ 828              		.cfi_endproc
+ARM GAS  /tmp/cclcSZJb.s 			page 21
+
+
+ 829              	.LFE341:
+ 831              		.text
+ 832              	.Letext0:
+ 833              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 834              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
+ 835              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 836              		.file 5 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h"
+ 837              		.file 6 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 838              		.file 7 "/usr/include/newlib/sys/_types.h"
+ 839              		.file 8 "/usr/include/newlib/sys/reent.h"
+ 840              		.file 9 "/usr/include/newlib/sys/lock.h"
+ 841              		.file 10 "/usr/include/newlib/math.h"
+ 842              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 843              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h"
+ 844              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 845              		.file 14 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_fmc.h"
+ 846              		.file 15 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sdram.h"
+ 847              		.file 16 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 848              		.file 17 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 849              		.file 18 "./BSP/components/is42s32800j/is42s32800j.h"
+ARM GAS  /tmp/cclcSZJb.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 is42s32800j.c
+     /tmp/cclcSZJb.s:17     .bss.Command:0000000000000000 $d
+     /tmp/cclcSZJb.s:20     .bss.Command:0000000000000000 Command
+     /tmp/cclcSZJb.s:23     .text.IS42S32800J_Init:0000000000000000 $t
+     /tmp/cclcSZJb.s:31     .text.IS42S32800J_Init:0000000000000000 IS42S32800J_Init
+     /tmp/cclcSZJb.s:134    .text.IS42S32800J_ClockEnable:0000000000000000 IS42S32800J_ClockEnable
+     /tmp/cclcSZJb.s:782    .text.IS42S32800J_Delay:0000000000000000 IS42S32800J_Delay
+     /tmp/cclcSZJb.s:210    .text.IS42S32800J_Precharge:0000000000000000 IS42S32800J_Precharge
+     /tmp/cclcSZJb.s:443    .text.IS42S32800J_RefreshMode:0000000000000000 IS42S32800J_RefreshMode
+     /tmp/cclcSZJb.s:286    .text.IS42S32800J_ModeRegConfig:0000000000000000 IS42S32800J_ModeRegConfig
+     /tmp/cclcSZJb.s:520    .text.IS42S32800J_RefreshRate:0000000000000000 IS42S32800J_RefreshRate
+     /tmp/cclcSZJb.s:127    .text.IS42S32800J_ClockEnable:0000000000000000 $t
+     /tmp/cclcSZJb.s:198    .text.IS42S32800J_ClockEnable:0000000000000044 $d
+     /tmp/cclcSZJb.s:203    .text.IS42S32800J_Precharge:0000000000000000 $t
+     /tmp/cclcSZJb.s:274    .text.IS42S32800J_Precharge:0000000000000044 $d
+     /tmp/cclcSZJb.s:279    .text.IS42S32800J_ModeRegConfig:0000000000000000 $t
+     /tmp/cclcSZJb.s:376    .text.IS42S32800J_ModeRegConfig:0000000000000064 $d
+     /tmp/cclcSZJb.s:381    .text.IS42S32800J_TimingConfig:0000000000000000 $t
+     /tmp/cclcSZJb.s:388    .text.IS42S32800J_TimingConfig:0000000000000000 IS42S32800J_TimingConfig
+     /tmp/cclcSZJb.s:436    .text.IS42S32800J_RefreshMode:0000000000000000 $t
+     /tmp/cclcSZJb.s:508    .text.IS42S32800J_RefreshMode:0000000000000048 $d
+     /tmp/cclcSZJb.s:513    .text.IS42S32800J_RefreshRate:0000000000000000 $t
+     /tmp/cclcSZJb.s:568    .text.IS42S32800J_EnterPowerMode:0000000000000000 $t
+     /tmp/cclcSZJb.s:575    .text.IS42S32800J_EnterPowerMode:0000000000000000 IS42S32800J_EnterPowerMode
+     /tmp/cclcSZJb.s:639    .text.IS42S32800J_EnterPowerMode:0000000000000044 $d
+     /tmp/cclcSZJb.s:644    .text.IS42S32800J_ExitPowerMode:0000000000000000 $t
+     /tmp/cclcSZJb.s:651    .text.IS42S32800J_ExitPowerMode:0000000000000000 IS42S32800J_ExitPowerMode
+     /tmp/cclcSZJb.s:715    .text.IS42S32800J_ExitPowerMode:0000000000000044 $d
+     /tmp/cclcSZJb.s:720    .text.IS42S32800J_Sendcmd:0000000000000000 $t
+     /tmp/cclcSZJb.s:727    .text.IS42S32800J_Sendcmd:0000000000000000 IS42S32800J_Sendcmd
+     /tmp/cclcSZJb.s:776    .text.IS42S32800J_Delay:0000000000000000 $t
+
+UNDEFINED SYMBOLS
+HAL_SDRAM_SendCommand
+HAL_SDRAM_Init
+HAL_SDRAM_ProgramRefreshRate
+HAL_GetTick

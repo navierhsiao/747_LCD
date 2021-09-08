@@ -1,0 +1,229 @@
+ARM GAS  /tmp/ccQ5gLxw.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"otm8009a_reg.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.otm8009a_read_reg,"ax",%progbits
+  17              		.align	1
+  18              		.global	otm8009a_read_reg
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	otm8009a_read_reg:
+  26              	.LFB104:
+  27              		.file 1 "./BSP/components/otm8009a/otm8009a_reg.c"
+   1:./BSP/components/otm8009a/otm8009a_reg.c **** /**
+   2:./BSP/components/otm8009a/otm8009a_reg.c ****   ******************************************************************************
+   3:./BSP/components/otm8009a/otm8009a_reg.c ****   * @file    otm8009a_reg.c
+   4:./BSP/components/otm8009a/otm8009a_reg.c ****   * @author  MCD Application Team
+   5:./BSP/components/otm8009a/otm8009a_reg.c ****   * @brief   This file provides generic register APIs to read/write the OTM8009A
+   6:./BSP/components/otm8009a/otm8009a_reg.c ****   *          controller's registers
+   7:./BSP/components/otm8009a/otm8009a_reg.c ****   ******************************************************************************
+   8:./BSP/components/otm8009a/otm8009a_reg.c ****   * @attention
+   9:./BSP/components/otm8009a/otm8009a_reg.c ****   *
+  10:./BSP/components/otm8009a/otm8009a_reg.c ****   * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  11:./BSP/components/otm8009a/otm8009a_reg.c ****   * All rights reserved.</center></h2>
+  12:./BSP/components/otm8009a/otm8009a_reg.c ****   *
+  13:./BSP/components/otm8009a/otm8009a_reg.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  14:./BSP/components/otm8009a/otm8009a_reg.c ****   * the "License"; You may not use this file except in compliance with the
+  15:./BSP/components/otm8009a/otm8009a_reg.c ****   * License. You may obtain a copy of the License at:
+  16:./BSP/components/otm8009a/otm8009a_reg.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  17:./BSP/components/otm8009a/otm8009a_reg.c ****   *
+  18:./BSP/components/otm8009a/otm8009a_reg.c ****   ******************************************************************************
+  19:./BSP/components/otm8009a/otm8009a_reg.c ****   */
+  20:./BSP/components/otm8009a/otm8009a_reg.c **** 
+  21:./BSP/components/otm8009a/otm8009a_reg.c **** /* Includes ------------------------------------------------------------------*/
+  22:./BSP/components/otm8009a/otm8009a_reg.c **** #include "otm8009a_reg.h"
+  23:./BSP/components/otm8009a/otm8009a_reg.c **** 
+  24:./BSP/components/otm8009a/otm8009a_reg.c **** /** @addtogroup BSP
+  25:./BSP/components/otm8009a/otm8009a_reg.c ****   * @{
+  26:./BSP/components/otm8009a/otm8009a_reg.c ****   */
+  27:./BSP/components/otm8009a/otm8009a_reg.c ****   
+  28:./BSP/components/otm8009a/otm8009a_reg.c **** /** @addtogroup Components
+  29:./BSP/components/otm8009a/otm8009a_reg.c ****   * @{
+  30:./BSP/components/otm8009a/otm8009a_reg.c ****   */ 
+  31:./BSP/components/otm8009a/otm8009a_reg.c **** 
+ARM GAS  /tmp/ccQ5gLxw.s 			page 2
+
+
+  32:./BSP/components/otm8009a/otm8009a_reg.c **** /** @addtogroup OTM8009A
+  33:./BSP/components/otm8009a/otm8009a_reg.c ****   * @{
+  34:./BSP/components/otm8009a/otm8009a_reg.c ****   */
+  35:./BSP/components/otm8009a/otm8009a_reg.c ****     
+  36:./BSP/components/otm8009a/otm8009a_reg.c **** /* Private types -------------------------------------------------------------*/
+  37:./BSP/components/otm8009a/otm8009a_reg.c **** /* Private variables ---------------------------------------------------------*/
+  38:./BSP/components/otm8009a/otm8009a_reg.c **** /* Private constants ---------------------------------------------------------*/
+  39:./BSP/components/otm8009a/otm8009a_reg.c **** /** @defgroup OTM8009A_Private_Constants OTM8009A Private Constants
+  40:./BSP/components/otm8009a/otm8009a_reg.c ****   * @{
+  41:./BSP/components/otm8009a/otm8009a_reg.c ****   */
+  42:./BSP/components/otm8009a/otm8009a_reg.c **** 
+  43:./BSP/components/otm8009a/otm8009a_reg.c **** /**
+  44:./BSP/components/otm8009a/otm8009a_reg.c ****   * @}
+  45:./BSP/components/otm8009a/otm8009a_reg.c ****   */
+  46:./BSP/components/otm8009a/otm8009a_reg.c **** 
+  47:./BSP/components/otm8009a/otm8009a_reg.c **** /* Private macros ------------------------------------------------------------*/
+  48:./BSP/components/otm8009a/otm8009a_reg.c **** /* Private functions ---------------------------------------------------------*/
+  49:./BSP/components/otm8009a/otm8009a_reg.c **** 
+  50:./BSP/components/otm8009a/otm8009a_reg.c **** /************** Generic Function  *******************/
+  51:./BSP/components/otm8009a/otm8009a_reg.c **** /*******************************************************************************
+  52:./BSP/components/otm8009a/otm8009a_reg.c **** * Function Name : otm8009a_read_reg
+  53:./BSP/components/otm8009a/otm8009a_reg.c **** * Description   : Generic Reading function. It must be fullfilled with either
+  54:./BSP/components/otm8009a/otm8009a_reg.c **** *                 I2C or SPI reading functions
+  55:./BSP/components/otm8009a/otm8009a_reg.c **** * Input         : Register Address, length of buffer
+  56:./BSP/components/otm8009a/otm8009a_reg.c **** * Output        : Data Read
+  57:./BSP/components/otm8009a/otm8009a_reg.c **** *******************************************************************************/
+  58:./BSP/components/otm8009a/otm8009a_reg.c **** int32_t otm8009a_read_reg(otm8009a_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint16_t length)
+  59:./BSP/components/otm8009a/otm8009a_reg.c **** {
+  28              		.loc 1 59 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 90B5     		push	{r4, r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 12
+  35              		.cfi_offset 4, -12
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 85B0     		sub	sp, sp, #20
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_offset 32
+  41 0004 00AF     		add	r7, sp, #0
+  42              	.LCFI2:
+  43              		.cfi_def_cfa_register 7
+  44 0006 F860     		str	r0, [r7, #12]
+  45 0008 7A60     		str	r2, [r7, #4]
+  46 000a 1A46     		mov	r2, r3
+  47 000c 0B46     		mov	r3, r1	@ movhi
+  48 000e 7B81     		strh	r3, [r7, #10]	@ movhi
+  49 0010 1346     		mov	r3, r2	@ movhi
+  50 0012 3B81     		strh	r3, [r7, #8]	@ movhi
+  60:./BSP/components/otm8009a/otm8009a_reg.c ****   return ctx->ReadReg(ctx->handle, reg, pdata, length);
+  51              		.loc 1 60 13
+  52 0014 FB68     		ldr	r3, [r7, #12]
+  53 0016 5C68     		ldr	r4, [r3, #4]
+  54              		.loc 1 60 10
+  55 0018 FB68     		ldr	r3, [r7, #12]
+ARM GAS  /tmp/ccQ5gLxw.s 			page 3
+
+
+  56 001a 9868     		ldr	r0, [r3, #8]
+  57 001c 3B89     		ldrh	r3, [r7, #8]
+  58 001e 7989     		ldrh	r1, [r7, #10]
+  59 0020 7A68     		ldr	r2, [r7, #4]
+  60 0022 A047     		blx	r4
+  61              	.LVL0:
+  62 0024 0346     		mov	r3, r0
+  61:./BSP/components/otm8009a/otm8009a_reg.c **** }
+  63              		.loc 1 61 1
+  64 0026 1846     		mov	r0, r3
+  65 0028 1437     		adds	r7, r7, #20
+  66              	.LCFI3:
+  67              		.cfi_def_cfa_offset 12
+  68 002a BD46     		mov	sp, r7
+  69              	.LCFI4:
+  70              		.cfi_def_cfa_register 13
+  71              		@ sp needed
+  72 002c 90BD     		pop	{r4, r7, pc}
+  73              		.cfi_endproc
+  74              	.LFE104:
+  76              		.section	.text.otm8009a_write_reg,"ax",%progbits
+  77              		.align	1
+  78              		.global	otm8009a_write_reg
+  79              		.syntax unified
+  80              		.thumb
+  81              		.thumb_func
+  82              		.fpu fpv5-d16
+  84              	otm8009a_write_reg:
+  85              	.LFB105:
+  62:./BSP/components/otm8009a/otm8009a_reg.c **** 
+  63:./BSP/components/otm8009a/otm8009a_reg.c **** /*******************************************************************************
+  64:./BSP/components/otm8009a/otm8009a_reg.c **** * Function Name : otm8009a_write_reg
+  65:./BSP/components/otm8009a/otm8009a_reg.c **** * Description   : Generic Writing function. It must be fullfilled with either
+  66:./BSP/components/otm8009a/otm8009a_reg.c **** *                 I2C or SPI writing function
+  67:./BSP/components/otm8009a/otm8009a_reg.c **** * Input         : Register Address, Data to be written, length of buffer
+  68:./BSP/components/otm8009a/otm8009a_reg.c **** * Output        : None
+  69:./BSP/components/otm8009a/otm8009a_reg.c **** *******************************************************************************/
+  70:./BSP/components/otm8009a/otm8009a_reg.c **** int32_t otm8009a_write_reg(otm8009a_ctx_t *ctx, uint16_t reg, const uint8_t *pdata, uint16_t length
+  71:./BSP/components/otm8009a/otm8009a_reg.c **** {
+  86              		.loc 1 71 1
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 16
+  89              		@ frame_needed = 1, uses_anonymous_args = 0
+  90 0000 90B5     		push	{r4, r7, lr}
+  91              	.LCFI5:
+  92              		.cfi_def_cfa_offset 12
+  93              		.cfi_offset 4, -12
+  94              		.cfi_offset 7, -8
+  95              		.cfi_offset 14, -4
+  96 0002 85B0     		sub	sp, sp, #20
+  97              	.LCFI6:
+  98              		.cfi_def_cfa_offset 32
+  99 0004 00AF     		add	r7, sp, #0
+ 100              	.LCFI7:
+ 101              		.cfi_def_cfa_register 7
+ 102 0006 F860     		str	r0, [r7, #12]
+ 103 0008 7A60     		str	r2, [r7, #4]
+ARM GAS  /tmp/ccQ5gLxw.s 			page 4
+
+
+ 104 000a 1A46     		mov	r2, r3
+ 105 000c 0B46     		mov	r3, r1	@ movhi
+ 106 000e 7B81     		strh	r3, [r7, #10]	@ movhi
+ 107 0010 1346     		mov	r3, r2	@ movhi
+ 108 0012 3B81     		strh	r3, [r7, #8]	@ movhi
+  72:./BSP/components/otm8009a/otm8009a_reg.c ****   return ctx->WriteReg(ctx->handle, reg, (uint8_t *)pdata, length);
+ 109              		.loc 1 72 13
+ 110 0014 FB68     		ldr	r3, [r7, #12]
+ 111 0016 1C68     		ldr	r4, [r3]
+ 112              		.loc 1 72 10
+ 113 0018 FB68     		ldr	r3, [r7, #12]
+ 114 001a 9868     		ldr	r0, [r3, #8]
+ 115 001c 3B89     		ldrh	r3, [r7, #8]
+ 116 001e 7989     		ldrh	r1, [r7, #10]
+ 117 0020 7A68     		ldr	r2, [r7, #4]
+ 118 0022 A047     		blx	r4
+ 119              	.LVL1:
+ 120 0024 0346     		mov	r3, r0
+  73:./BSP/components/otm8009a/otm8009a_reg.c **** }
+ 121              		.loc 1 73 1
+ 122 0026 1846     		mov	r0, r3
+ 123 0028 1437     		adds	r7, r7, #20
+ 124              	.LCFI8:
+ 125              		.cfi_def_cfa_offset 12
+ 126 002a BD46     		mov	sp, r7
+ 127              	.LCFI9:
+ 128              		.cfi_def_cfa_register 13
+ 129              		@ sp needed
+ 130 002c 90BD     		pop	{r4, r7, pc}
+ 131              		.cfi_endproc
+ 132              	.LFE105:
+ 134              		.text
+ 135              	.Letext0:
+ 136              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 137              		.file 3 "./BSP/components/otm8009a/otm8009a_reg.h"
+ARM GAS  /tmp/ccQ5gLxw.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 otm8009a_reg.c
+     /tmp/ccQ5gLxw.s:17     .text.otm8009a_read_reg:0000000000000000 $t
+     /tmp/ccQ5gLxw.s:25     .text.otm8009a_read_reg:0000000000000000 otm8009a_read_reg
+     /tmp/ccQ5gLxw.s:77     .text.otm8009a_write_reg:0000000000000000 $t
+     /tmp/ccQ5gLxw.s:84     .text.otm8009a_write_reg:0000000000000000 otm8009a_write_reg
+
+NO UNDEFINED SYMBOLS
